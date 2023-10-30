@@ -21,6 +21,7 @@
                 <DataGridTextColumn Header="Customer ID" Binding="{Binding customer_id}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding total}" />
+                <DataGridTextColumn Header="Active" Binding="{Binding active}" />
                 <DataGridTemplateColumn Header="Acción">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
