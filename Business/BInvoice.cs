@@ -10,24 +10,26 @@ namespace Business
 {
     public class BInvoice
     {
-        public List<Invoice> GetByDate(DateTime date)
+        public List<Invoice> GetInvoiceActives()
         {
-
             DInvoice data = new DInvoice();
             var invoices = data.Get();
-            var result = invoices.Where(x => x.date == date).ToList();
-            //lambda          
-
+            var result = invoices.Where(x => x.active == true).ToList();
             return result;
         }
-        public List<Invoice> Get()
+
+        public List<Invoice> GetByDate(DateTime date)
         {
-
-
             DInvoice data = new DInvoice();
-            var invoices = data.Get();
+            var invoices = GetInvoiceActives();
+            var result = invoices.Where(x => x.date.Date == date.Date).ToList();
+            return result;
+        }
 
-            return invoices;
+        public void DeleteInvoice(int id)
+        {
+            DInvoice data = new DInvoice();
+            data.DeleteInvoice(id);
         }
     }
 }

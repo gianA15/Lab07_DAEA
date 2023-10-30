@@ -8,13 +8,27 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
+        <DatePicker x:Name="datepicker"  Grid.Row="0" Margin="34,0,552,184"/>
+        <Button Content="Buscar"  Grid.Row="0" HorizontalAlignment="Left" Margin="271,7,0,0" VerticalAlignment="Top" Click="ListInvoiceByDate" Width="90"/>
+        <Button Content="Listar" Grid.Row="0" HorizontalAlignment="Left" Margin="380,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.232,0.39" Click="Listar" Width="90"/>
 
-        <TextBox x:Name="txtDate" Margin="133,10,467,12" Grid.Row="1" Width="200" />
-        <Button Content="Buscar" Click="Button_Click" Margin="10" Grid.Row="1" Width="100" />
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Margin="10" Grid.Row="2" />
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Margin="5,46,10,0" Grid.RowSpan="2" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Invoice ID" Binding="{Binding invoice_id}" />
+                <DataGridTextColumn Header="Customer ID" Binding="{Binding customer_id}" />
+                <DataGridTextColumn Header="Date" Binding="{Binding date}" />
+                <DataGridTextColumn Header="Total" Binding="{Binding total}" />
+                <DataGridTemplateColumn Header="Acción">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Eliminar" Click="DeleteInvoice" CommandParameter="{Binding invoice_id}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

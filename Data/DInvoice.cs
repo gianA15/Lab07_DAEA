@@ -11,7 +11,7 @@ namespace Data
 {
     public class DInvoice
     {
-        private readonly string connectionString = "Data Source=LAB1504-29\\SQLEXPRESS;Initial Catalog=facturadb;User ID=garce;Password=admin";
+        private readonly string connectionString = "Data Source=LAPTOP-ONLL0VT1\\SQLEXPRESS;Initial Catalog=FacturaDB;User ID=garce;Password=admin123";
 
         public List<Invoice> Get()
         {
@@ -44,5 +44,23 @@ namespace Data
             }
             return invoices;
         }
+        public void DeleteInvoice(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("eliminar_invoices", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter("@invoice_id", SqlDbType.Int));
+                    command.Parameters["@invoice_id"].Value = id;
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

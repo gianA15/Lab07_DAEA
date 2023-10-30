@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Business;
+using Data;
 using Entity;
+
 
 namespace Lab07
 {
@@ -22,25 +24,40 @@ namespace Lab07
     /// </summary>
     public partial class MainWindow : Window
     {
+        BInvoice bInvoice = new BInvoice();
         public MainWindow()
         {
             InitializeComponent();
+            ListInvoice();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DeleteInvoice(object sender, RoutedEventArgs e)
         {
-            DateTime invoiceDate;
+            int invoiceId = (int)((Button)sender).CommandParameter;
+            bInvoice.DeleteInvoice(invoiceId);
+            ListInvoice();
+        }
 
-            if (DateTime.TryParse(txtDate.Text, out invoiceDate))
+        private void ListInvoiceByDate(object sender, RoutedEventArgs e)
+        {
+            DateTime? selectedDate = datepicker.SelectedDate;
+            Console.WriteLine(selectedDate);
+            if (selectedDate.HasValue)
             {
-                BInvoice bInvoice = new BInvoice();
-                List<Invoice> invoices = bInvoice.GetByDate(invoiceDate);
+                List<Invoice> invoices = bInvoice.GetByDate(selectedDate.Value);
                 dataGrid.ItemsSource = invoices;
             }
-            else
-            {
-                MessageBox.Show("Formato de fecha incorrecto");
-            }
+        }
+
+        private void ListInvoice()
+        {
+            List<Invoice> invoices = bInvoice.GetInvoiceActives();
+            dataGrid.ItemsSource = invoices;
+        }
+
+        private void Listar(object sender, RoutedEventArgs e)
+        {
+            ListInvoice();
         }
 
     }
