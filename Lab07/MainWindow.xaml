@@ -11,7 +11,7 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <DatePicker x:Name="datepicker"  Grid.Row="0" Margin="34,0,552,184"/>
+        <DatePicker x:Name="datepicker"  Grid.Row="0" Margin="34,7,552,190"/>
         <Button Content="Buscar"  Grid.Row="0" HorizontalAlignment="Left" Margin="271,7,0,0" VerticalAlignment="Top" Click="ListInvoiceByDate" Width="90"/>
         <Button Content="Listar" Grid.Row="0" HorizontalAlignment="Left" Margin="380,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.232,0.39" Click="Listar" Width="90"/>
 
