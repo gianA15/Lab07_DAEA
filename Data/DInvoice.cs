@@ -11,7 +11,7 @@ namespace Data
 {
     public class DInvoice
     {
-        private readonly string connectionString = "Data Source=LAPTOP-ONLL0VT1\\SQLEXPRESS;Initial Catalog=FacturaDB;User ID=garce;Password=admin123";
+        private readonly string connectionString = "Data Source=LAB1504-30\\SQLEXPRESS;Initial Catalog=FacturaDB;User ID=garce;Password=admin";
 
         public List<Invoice> Get()
         {
