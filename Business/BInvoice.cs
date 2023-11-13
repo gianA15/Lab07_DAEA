@@ -26,10 +26,19 @@ namespace Business
             return result;
         }
 
-        public void DeleteInvoice(int id)
+        public bool insert(Invoice invoice)
         {
-            DInvoice data = new DInvoice();
-            data.DeleteInvoice(id);
+            DInvoice insertar = new DInvoice();
+            insertar.insert(invoice);
+            return true;
+        }
+
+        public bool DeleteRecord(int invoiceID)
+        {
+            DInvoice delete = new DInvoice();
+
+            return delete.eliminar(invoiceID);
+
         }
     }
 }

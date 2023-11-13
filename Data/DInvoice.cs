@@ -11,7 +11,7 @@ namespace Data
 {
     public class DInvoice
     {
-        private readonly string connectionString = "Data Source=LAB1504-30\\SQLEXPRESS;Initial Catalog=FacturaDB;User ID=garce;Password=admin";
+        private readonly string connectionString = "Data Source=LAPTOP-ONLL0VT1\\SQLEXPRESS;Initial Catalog=FacturaDB;User ID=garce;Password=admin123";
 
         public List<Invoice> Get()
         {
@@ -60,6 +60,47 @@ namespace Data
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public bool insert(Invoice invoice)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("InsertInvoice", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@customer_id", invoice.customer_id);
+                    command.Parameters.AddWithValue("@date", invoice.date);
+                    command.Parameters.AddWithValue("@total", invoice.total);
+                    command.Parameters.AddWithValue("@active", invoice.active);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            return true;
+        }
+        public bool eliminar(int invoiceID)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("UpdateActiveStatus", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@RecordID", invoiceID);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+
+                }
+            }
+            return true;
         }
 
     }
